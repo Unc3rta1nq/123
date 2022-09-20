@@ -8,8 +8,14 @@ template <int size, typename SomeValueType>
 class CyclicStaticArray
 {
 private:
-	SomeValueType* array=new SomeValueType[size];
+	SomeValueType* array = new SomeValueType[size];
+	
 public:
+	~CyclicStaticArray()
+	{
+		delete array;
+	}
+
 	void set_elements()
 	{
 		for (int i = 0; i < size; i++)
@@ -17,6 +23,7 @@ public:
 			array[i] = rand() % 10;
 		}
 	}
+
 	void get_cycle_array()
 	{
 		for (int i = 0; i < size; i++)
@@ -24,6 +31,7 @@ public:
 			cout << array[i] << " ";
 		}
 	}
+
 	SomeValueType operator[](int index)
 	{
 		if (index > size)
@@ -35,12 +43,10 @@ public:
 			if (index > (-size))
 			{
 				index += size;
-				return array[index];
 			}
 			else
 			{
-				index %= size;
-				index *= -1;
+  				index = (index % size) * (-1);
 			}
 		}
 		return array[index];
@@ -54,16 +60,19 @@ private:
 	vector<SomeValueType> array1;
 	int size_array = 0;
 public:
+
 	void add_element(SomeValueType i)
 	{
 		array1.push_back(i);
 		size_array++;
 	}
+
 	void get_cycle_dynamic_array()
 	{
 		for (int n : array1)
 			cout << n << " ";
 	}
+
 	SomeValueType operator[](int index)
 	{
 		if (index > size_array)
@@ -75,14 +84,11 @@ public:
 			if (index > (-size_array))
 			{
 				index += size_array;
-				return array1[index];
 			}
 			else
 			{
-				index %= size_array;
-				index *= -1;
+				index = (index % size_array) * (-1);
 			}
-
 		}
 		return array1[index];
 	}
@@ -91,7 +97,7 @@ public:
 int main(void)
 {
 	srand(time(NULL));
-	CyclicStaticArray<100,int> cycle;
+	CyclicStaticArray<13,int> cycle;
 	cycle.set_elements();
 	cout << endl;
 	cycle.get_cycle_array();
@@ -101,8 +107,7 @@ int main(void)
 	system("pause");
 	system("cls");
 	CyclicArray<int> ca;
-	int i=0;
-	for (i ; i < 100; i++)
+	for (int i=0 ; i < 10; i++)
 	ca.add_element(i);
 	ca.get_cycle_dynamic_array();
 	index = -55;
