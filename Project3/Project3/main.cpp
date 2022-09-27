@@ -11,7 +11,8 @@ int main()
 {
 	vector<string> FName;
 	vector<int> FSize;
-213123	path way;
+	string DirName, sub_name;
+	path way;
 	path _way;
 	path fileWay;
 	int n = 0, file_point = 0, tmp = 0, I=49;
